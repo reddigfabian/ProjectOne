@@ -8,7 +8,7 @@ import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by WillowTree, Inc. on 4/10/16.
+ * Created by Fabian Reddig on 05/23/2016.
  */
 public class BaseActivity extends AppCompatActivity {
     private CompositeSubscription subscription;

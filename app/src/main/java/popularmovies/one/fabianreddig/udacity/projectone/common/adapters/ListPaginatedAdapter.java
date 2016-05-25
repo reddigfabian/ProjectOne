@@ -1,7 +1,7 @@
 package popularmovies.one.fabianreddig.udacity.projectone.common.adapters;
 
 /**
- * Created by WillowTree, Inc. on 4/10/16.
+ * Created by Fabian Reddig on 05/23/2016.
  */
 
 import android.content.Intent;

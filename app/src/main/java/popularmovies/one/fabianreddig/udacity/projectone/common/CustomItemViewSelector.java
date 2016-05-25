@@ -5,7 +5,7 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 import popularmovies.one.fabianreddig.udacity.projectone.common.viewmodels.BaseViewModel;
 
 /**
- * Created by WillowTree, Inc. on 4/3/16.
+ * Created by Fabian Reddig on 05/23/2016.
  */
 public class CustomItemViewSelector<T extends BaseViewModel> extends BaseItemViewSelector<T> {
 

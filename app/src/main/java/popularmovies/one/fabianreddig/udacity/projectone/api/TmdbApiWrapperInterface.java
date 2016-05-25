@@ -6,7 +6,7 @@ import info.movito.themoviedbapi.model.MovieDb;
 import rx.Single;
 
 /**
- * Created by WillowTree, Inc. on 5/24/16.
+ * Created by Fabian Reddig on 05/23/2016.
  */
 public interface TmdbApiWrapperInterface {
 

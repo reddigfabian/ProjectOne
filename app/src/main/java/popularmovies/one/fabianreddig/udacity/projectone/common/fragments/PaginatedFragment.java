@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 
 /**
- * Created by WillowTree, Inc. on 4/10/16.
+ * Created by Fabian Reddig on 05/23/2016.
  */
 public abstract class PaginatedFragment extends BaseFragment {
 

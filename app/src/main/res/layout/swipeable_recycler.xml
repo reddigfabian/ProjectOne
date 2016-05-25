@@ -13,19 +13,31 @@
         <import type="android.support.v7.widget.LinearLayoutManager" />
     </data>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/refresh"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler"
-            android:layout_height="match_parent"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
             android:layout_width="match_parent"
-            app:adapter='@{"popularmovies.one.fabianreddig.udacity.projectone.common.adapters.ListPaginatedAdapter"}'
-            app:itemView="@{listModel.getItemView()}"
-            app:items="@{listModel.getModels()}"
-            app:layoutManager="@{LayoutManagers.staggeredGrid(2, LinearLayoutManager.VERTICAL)}" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                app:adapter='@{"popularmovies.one.fabianreddig.udacity.projectone.common.adapters.ListPaginatedAdapter"}'
+                app:itemView="@{listModel.getItemView()}"
+                app:items="@{listModel.getModels()}"
+                app:layoutManager="@{LayoutManagers.staggeredGrid(2, LinearLayoutManager.VERTICAL)}" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    </FrameLayout>
 
 </layout>

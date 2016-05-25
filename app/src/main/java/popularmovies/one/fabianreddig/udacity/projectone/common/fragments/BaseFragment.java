@@ -9,10 +9,10 @@ import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by WillowTree, Inc. on 4/10/16.
+ * Created by Fabian Reddig on 05/23/2016.
  */
 public abstract class BaseFragment extends Fragment {
-    CompositeSubscription subscription;
+    private CompositeSubscription subscription;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

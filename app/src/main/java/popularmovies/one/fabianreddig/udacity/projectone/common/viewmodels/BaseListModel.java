@@ -8,7 +8,7 @@ import java.util.List;
 import me.tatarka.bindingcollectionadapter.ItemViewSelector;
 
 /**
- * Created by WillowTree, Inc on 11/17/15.
+ * Created by Fabian Reddig on 05/23/2016.
  */
 public abstract class BaseListModel<T> extends BaseObservable {
     public abstract ObservableList<T> getModels();

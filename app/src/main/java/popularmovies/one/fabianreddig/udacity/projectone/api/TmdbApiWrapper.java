@@ -9,7 +9,7 @@ import popularmovies.one.fabianreddig.udacity.projectone.BuildConfig;
 import rx.Single;
 
 /**
- * Created by WillowTree, Inc. on 5/24/16.
+ * Created by Fabian Reddig on 05/23/2016.
  */
 public class TmdbApiWrapper implements TmdbApiWrapperInterface {
     public TmdbApi getApi() {
