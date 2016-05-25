@@ -20,7 +20,9 @@ public class MovieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
         PopularMoviesApplication.applicationComponent().inject(this);
-        switchFragment(MovieListFragment.newInstance());
+        if(savedInstanceState==null) {
+            switchFragment(MovieListFragment.newInstance());
+        }
     }
 
     public void switchFragment(Fragment frag){
