@@ -15,7 +15,7 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by WillowTree, Inc on 9/23/15.
+ * Created by Fabian Reddig on 5/23/16.
  */
 public class RxUtil {
 
