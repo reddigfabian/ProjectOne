@@ -8,6 +8,7 @@ import popularmovies.one.fabianreddig.udacity.projectone.dependencyinjection.mod
 import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.MovieActivity;
 import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.MovieListFragment;
 import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodels.MovieListItemViewModel;
+import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodels.MovieListViewModel;
 
 /**
  * Created by Fabian Reddig on 5/23/16.
@@ -16,6 +17,8 @@ import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodel
 @Singleton
 @Component(modules = {ApiModule.class, AppModule.class})
 public interface ApplicationComponent {
+    void inject(MovieListViewModel movieListViewModel);
+
     void inject(MovieActivity movieActivity);
 
     void inject(MovieListItemViewModel movieListItemViewModel);

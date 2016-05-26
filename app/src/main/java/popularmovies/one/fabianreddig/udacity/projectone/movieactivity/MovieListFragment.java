@@ -4,7 +4,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,12 @@ import popularmovies.one.fabianreddig.udacity.projectone.common.adapters.ListPag
 import popularmovies.one.fabianreddig.udacity.projectone.common.fragments.PaginatedFragment;
 import popularmovies.one.fabianreddig.udacity.projectone.databinding.FragmentMovieListBinding;
 import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodels.MovieListViewModel;
-import popularmovies.one.fabianreddig.udacity.projectone.util.RxUtil;
 
 /**
  * Created by Fabian Reddig on 5/23/16.
  */
 
-public class MovieListFragment extends PaginatedFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class MovieListFragment extends PaginatedFragment implements SwipeRefreshLayout.OnRefreshListener, MovieListViewModel.OnLoadCompleteListener{
     private static final String TAG = MovieListFragment.class.getName();
     private static final String PAGINATE_ACTION = TAG + "_PAGINATE";
 
@@ -43,6 +41,7 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getMovieListViewModel().attachToView();
+        getMovieListViewModel().setOnLoadCompleteListener(this);
     }
 
     @Nullable
@@ -69,13 +68,7 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
     }
 
     private void loadMovies(int page){
-        getMovieListViewModel().addSubscription(apiWrapper.getPopularMovieList(page).compose(RxUtil.singleBackgroundToMainThread())
-                .subscribe(movieDbs -> {
-                    getMovieListViewModel().addMovieDbs(movieDbs);// TODO: 5/25/16 Handle errors gracefully
-            stopRefreshing();
-            isRefreshing = false;
-            fragmentMainListBinding.swipeableRecyclerMain.refresh.setRefreshing(false);
-        }));
+        getMovieListViewModel().loadMovies(page);
     }
 
     @Override
@@ -90,7 +83,6 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
 
     @Override
     public void paginate(int page) {
-        Log.i(TAG, "Paginate with page = " + page);
         loadMovies(page);
     }
 
@@ -119,6 +111,11 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
     @Override
     public void onRefresh() {
         refresh(true);
+    }
+
+    @Override
+    public void onLoadComplete() {
+        stopRefreshing();
     }
 
     private void refresh(boolean swipeRefresh){
