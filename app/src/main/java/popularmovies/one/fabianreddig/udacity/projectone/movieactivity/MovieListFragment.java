@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,6 +117,12 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
     @Override
     public void onLoadComplete() {
         stopRefreshing();
+    }
+
+    @Override
+    public void onLoadError(Throwable e) {
+        Log.e(TAG, e.getMessage());
+        //TODO Handle this in the UI
     }
 
     private void refresh(boolean swipeRefresh){
