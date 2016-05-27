@@ -19,11 +19,6 @@ import rx.schedulers.Schedulers;
  */
 public class RxUtil {
 
-    //Suppress default constructor for noninstantiability
-    private RxUtil(){
-        throw new AssertionError();
-    }
-
     public static final int TIMEOUT = 500;
 
     public static <T> Observable.Transformer<T, T> observableBackgroundToMainThread() {
