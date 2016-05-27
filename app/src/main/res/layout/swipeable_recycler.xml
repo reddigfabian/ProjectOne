@@ -29,7 +29,7 @@
                 app:adapter='@{"popularmovies.one.fabianreddig.udacity.projectone.common.adapters.ListPaginatedAdapter"}'
                 app:itemView="@{listModel.getItemView()}"
                 app:items="@{listModel.getModels()}"
-                app:layoutManager="@{LayoutManagers.grid(2)}" />
+                app:layoutManager="@{LayoutManagers.staggeredGrid(2, LinearLayoutManager.VERTICAL)}" />
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <ProgressBar

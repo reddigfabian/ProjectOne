@@ -11,7 +11,6 @@ import popularmovies.one.fabianreddig.udacity.projectone.api.TmdbApiWrapper;
 import popularmovies.one.fabianreddig.udacity.projectone.common.CustomItemViewSelector;
 import popularmovies.one.fabianreddig.udacity.projectone.common.viewmodels.ListModel;
 import popularmovies.one.fabianreddig.udacity.projectone.util.RxUtil;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -35,10 +34,9 @@ public class MovieListViewModel{
 
     public interface OnLoadCompleteListener{
         void onLoadComplete();
-        void onLoadError(Throwable e);
     }
 
-    private OnLoadCompleteListener onLoadCompleteListener;
+    OnLoadCompleteListener onLoadCompleteListener;
 
     private MovieListViewModel(){
         PopularMoviesApplication.applicationComponent().inject(this);
@@ -50,7 +48,7 @@ public class MovieListViewModel{
         return movies;
     }
 
-    private void clearList(){
+    public void clearList(){
         movies.clearModels();
     }
 
@@ -61,7 +59,7 @@ public class MovieListViewModel{
         return instance;
     }
 
-    private void addMovieDbs(List<MovieDb> movieDbs) {
+    public void addMovieDbs(List<MovieDb> movieDbs) {
         for (MovieDb movieDb : movieDbs) {
             movies.addModel(new MovieListItemViewModel(movieDb));
         }
@@ -78,11 +76,11 @@ public class MovieListViewModel{
         onLoadCompleteListener = null;
     }
 
-    private void addSubscription(Subscription subscription) {
+    public void addSubscription(Subscription subscription) {
         this.subscription.add(subscription);
     }
 
-    private void clearSubscriptions() {
+    public void clearSubscriptions() {
         if (!subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
@@ -96,21 +94,9 @@ public class MovieListViewModel{
 
     public void loadMovies(int page){
         addSubscription(apiWrapper.getPopularMovieList(page).compose(RxUtil.singleBackgroundToMainThread())
-                .subscribe(new Subscriber<List<MovieDb>>() {
-                    @Override
-                    public void onCompleted() {
-                        onLoadCompleteListener.onLoadComplete();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        onLoadCompleteListener.onLoadError(e);
-                    }
-
-                    @Override
-                    public void onNext(List<MovieDb> movieDbs) {
-                        addMovieDbs(movieDbs);
-                    }
+                .subscribe(movieDbs -> {
+                    addMovieDbs(movieDbs);// TODO: 5/25/16 Handle errors gracefully
+                    onLoadCompleteListener.onLoadComplete();
                 }));
     }
 }

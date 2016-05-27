@@ -6,6 +6,7 @@ import dagger.Component;
 import popularmovies.one.fabianreddig.udacity.projectone.dependencyinjection.modules.ApiModule;
 import popularmovies.one.fabianreddig.udacity.projectone.dependencyinjection.modules.AppModule;
 import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.MovieActivity;
+import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.MovieListFragment;
 import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodels.MovieListItemViewModel;
 import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodels.MovieListViewModel;
 
@@ -21,4 +22,6 @@ public interface ApplicationComponent {
     void inject(MovieActivity movieActivity);
 
     void inject(MovieListItemViewModel movieListItemViewModel);
+
+    void inject(MovieListFragment movieListFragment);
 }
