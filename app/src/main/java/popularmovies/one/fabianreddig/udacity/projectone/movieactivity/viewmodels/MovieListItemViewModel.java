@@ -28,8 +28,8 @@ public class MovieListItemViewModel extends BaseViewModel{
     }
 
     public void onMovieClicked(View v){
-        Intent petClickIntent = new Intent(ON_MOVIE_CLICKED);
-        broadcastManager.sendBroadcast(petClickIntent);
+        Intent movieClickIntent = new Intent(ON_MOVIE_CLICKED);
+        broadcastManager.sendBroadcast(movieClickIntent);
     }
 
     public String movieText(){
