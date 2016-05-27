@@ -11,10 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:text="@{viewModel.movieText}"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView" />
+            app:imageUrl="@{viewModel.completePosterPath}"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:contentDescription="@{viewModel.movieText()}"/>
     </LinearLayout>
 </layout>

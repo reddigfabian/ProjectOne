@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import info.movito.themoviedbapi.model.MovieDb;
 import popularmovies.one.fabianreddig.udacity.projectone.PopularMoviesApplication;
 import popularmovies.one.fabianreddig.udacity.projectone.R;
+import popularmovies.one.fabianreddig.udacity.projectone.api.TmdbApiWrapper;
 import popularmovies.one.fabianreddig.udacity.projectone.common.viewmodels.BaseViewModel;
 
 /**
@@ -34,6 +35,10 @@ public class MovieListItemViewModel extends BaseViewModel{
 
     public String movieText(){
         return movie.getTitle();
+    }
+
+    public String completePosterPath(){
+        return TmdbApiWrapper.IMAGE_BASE_URL + TmdbApiWrapper.IMAGE_WIDTH_PARAM_185 + movie.getPosterPath();
     }
 
     @Override

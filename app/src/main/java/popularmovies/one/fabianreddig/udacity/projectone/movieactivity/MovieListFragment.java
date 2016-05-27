@@ -4,15 +4,12 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import javax.inject.Inject;
-
-import popularmovies.one.fabianreddig.udacity.projectone.PopularMoviesApplication;
 import popularmovies.one.fabianreddig.udacity.projectone.R;
-import popularmovies.one.fabianreddig.udacity.projectone.api.TmdbApiWrapper;
 import popularmovies.one.fabianreddig.udacity.projectone.common.adapters.ListPaginatedAdapter;
 import popularmovies.one.fabianreddig.udacity.projectone.common.fragments.PaginatedFragment;
 import popularmovies.one.fabianreddig.udacity.projectone.databinding.FragmentMovieListBinding;
@@ -25,9 +22,6 @@ import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodel
 public class MovieListFragment extends PaginatedFragment implements SwipeRefreshLayout.OnRefreshListener, MovieListViewModel.OnLoadCompleteListener{
     private static final String TAG = MovieListFragment.class.getName();
     private static final String PAGINATE_ACTION = TAG + "_PAGINATE";
-
-    @Inject
-    TmdbApiWrapper apiWrapper;
 
     FragmentMovieListBinding fragmentMainListBinding;
 
@@ -47,7 +41,6 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        PopularMoviesApplication.applicationComponent().inject(this);
         databindingSetup(container);
         return fragmentMainListBinding.getRoot();
     }
@@ -116,6 +109,12 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
     @Override
     public void onLoadComplete() {
         stopRefreshing();
+    }
+
+    @Override
+    public void onLoadError(Throwable e) {
+        Log.e(TAG, e.getMessage());
+        //TODO Handle this in the UI
     }
 
     private void refresh(boolean swipeRefresh){
