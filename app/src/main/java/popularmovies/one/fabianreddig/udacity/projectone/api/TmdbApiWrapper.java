@@ -10,8 +10,14 @@ import rx.Single;
 
 /**
  * Created by Fabian Reddig on 05/23/2016.
+ *
+ * Wraps functionality of TmdbApi and adds some functionality
  */
 public class TmdbApiWrapper implements TmdbApiWrapperInterface {
+
+    public static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
+    public static final String IMAGE_WIDTH_PARAM_185 = "w185/";
+
     public TmdbApi getApi() {
         return new TmdbApi(BuildConfig.THE_MOVIE_DB_API_KEY);
     }

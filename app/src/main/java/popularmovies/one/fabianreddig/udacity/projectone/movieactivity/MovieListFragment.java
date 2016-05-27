@@ -9,11 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import javax.inject.Inject;
-
-import popularmovies.one.fabianreddig.udacity.projectone.PopularMoviesApplication;
 import popularmovies.one.fabianreddig.udacity.projectone.R;
-import popularmovies.one.fabianreddig.udacity.projectone.api.TmdbApiWrapper;
 import popularmovies.one.fabianreddig.udacity.projectone.common.adapters.ListPaginatedAdapter;
 import popularmovies.one.fabianreddig.udacity.projectone.common.fragments.PaginatedFragment;
 import popularmovies.one.fabianreddig.udacity.projectone.databinding.FragmentMovieListBinding;
@@ -26,9 +22,6 @@ import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodel
 public class MovieListFragment extends PaginatedFragment implements SwipeRefreshLayout.OnRefreshListener, MovieListViewModel.OnLoadCompleteListener{
     private static final String TAG = MovieListFragment.class.getName();
     private static final String PAGINATE_ACTION = TAG + "_PAGINATE";
-
-    @Inject
-    TmdbApiWrapper apiWrapper;
 
     FragmentMovieListBinding fragmentMainListBinding;
 
@@ -48,7 +41,6 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        PopularMoviesApplication.applicationComponent().inject(this);
         databindingSetup(container);
         return fragmentMainListBinding.getRoot();
     }
