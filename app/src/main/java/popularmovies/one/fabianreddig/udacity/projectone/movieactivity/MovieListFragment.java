@@ -17,13 +17,12 @@ import popularmovies.one.fabianreddig.udacity.projectone.common.adapters.ListPag
 import popularmovies.one.fabianreddig.udacity.projectone.common.fragments.PaginatedFragment;
 import popularmovies.one.fabianreddig.udacity.projectone.databinding.FragmentMovieListBinding;
 import popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodels.MovieListViewModel;
-import popularmovies.one.fabianreddig.udacity.projectone.util.RxUtil;
 
 /**
  * Created by Fabian Reddig on 5/23/16.
  */
 
-public class MovieListFragment extends PaginatedFragment implements SwipeRefreshLayout.OnRefreshListener{
+public class MovieListFragment extends PaginatedFragment implements SwipeRefreshLayout.OnRefreshListener, MovieListViewModel.OnLoadCompleteListener{
     private static final String TAG = MovieListFragment.class.getName();
     private static final String PAGINATE_ACTION = TAG + "_PAGINATE";
 
@@ -33,10 +32,16 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
     FragmentMovieListBinding fragmentMainListBinding;
 
     private boolean isRefreshing;
-    private boolean isFirstRun;
 
     public static MovieListFragment newInstance(){
         return new MovieListFragment();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getMovieListViewModel().attachToView();
+        getMovieListViewModel().setOnLoadCompleteListener(this);
     }
 
     @Nullable
@@ -51,21 +56,19 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerSetup();
+        if(savedInstanceState==null){
+            refresh(false);
+        }
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        refresh(false); // TODO: 5/23/16 Handle resuming to a paginated state
+    public void onDestroy() {
+        super.onDestroy();
+        getMovieListViewModel().detachFromView();
     }
 
     private void loadMovies(int page){
-        addSubscription(apiWrapper.getPopularMovieList(page).compose(RxUtil.singleBackgroundToMainThread())
-                .subscribe(movieDbs -> {
-                    getMovieListViewModel().addMovieDbs(movieDbs);
-            isRefreshing = false;
-            fragmentMainListBinding.swipeableRecyclerMain.refresh.setRefreshing(false);
-        }));
+        getMovieListViewModel().loadMovies(page);
     }
 
     @Override
@@ -110,17 +113,34 @@ public class MovieListFragment extends PaginatedFragment implements SwipeRefresh
         refresh(true);
     }
 
+    @Override
+    public void onLoadComplete() {
+        stopRefreshing();
+    }
+
     private void refresh(boolean swipeRefresh){
-        getMovieListViewModel().clearList();
         if(!swipeRefresh){
             if(!isRefreshing){
-                isRefreshing = true;
-                paginate(page=0);
+                getMovieListViewModel().refresh();
+                startRefreshing();
+                paginate(page=1);
             }else{
                 fragmentMainListBinding.swipeableRecyclerMain.refresh.setRefreshing(false);
             }
         }else{
-            paginate(page=0);
+            getMovieListViewModel().refresh();
+            paginate(page=1);
         }
+    }
+
+    private void startRefreshing(){
+        isRefreshing = true;
+        fragmentMainListBinding.swipeableRecyclerMain.swipeableRecyclerMainProgress.setVisibility(View.VISIBLE);
+    }
+
+    private void stopRefreshing(){
+        isRefreshing = false;
+        fragmentMainListBinding.swipeableRecyclerMain.swipeableRecyclerMainProgress.setVisibility(View.GONE);
+        fragmentMainListBinding.swipeableRecyclerMain.refresh.setRefreshing(false);
     }
 }
