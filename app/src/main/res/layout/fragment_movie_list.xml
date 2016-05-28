@@ -13,7 +13,8 @@
         <include
             android:id="@+id/swipeable_recycler_main"
             layout="@layout/swipeable_recycler"
-            app:listModel="@{movieListViewModel.getMovies}"/>
+            app:listModel="@{movieListViewModel.getMovies}"
+            app:columnCount="@{movieListViewModel.columnCount}"/>
 
     </FrameLayout>
 </layout>

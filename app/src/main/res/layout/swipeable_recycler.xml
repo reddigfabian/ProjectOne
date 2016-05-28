@@ -8,6 +8,9 @@
         <variable
             name="listModel"
             type="popularmovies.one.fabianreddig.udacity.projectone.common.viewmodels.ListModel" />
+        <variable
+            name="columnCount"
+            type="int" />
 
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
         <import type="android.support.v7.widget.LinearLayoutManager" />
@@ -29,7 +32,7 @@
                 app:adapter='@{"popularmovies.one.fabianreddig.udacity.projectone.common.adapters.ListPaginatedAdapter"}'
                 app:itemView="@{listModel.getItemView()}"
                 app:items="@{listModel.getModels()}"
-                app:layoutManager="@{LayoutManagers.grid(2)}" />
+                app:layoutManager="@{LayoutManagers.grid(columnCount)}" />
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <ProgressBar

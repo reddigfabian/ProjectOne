@@ -13,6 +13,7 @@ import popularmovies.one.fabianreddig.udacity.projectone.api.TmdbApiWrapper;
 import popularmovies.one.fabianreddig.udacity.projectone.common.CustomItemViewSelector;
 import popularmovies.one.fabianreddig.udacity.projectone.common.viewmodels.ListModel;
 import popularmovies.one.fabianreddig.udacity.projectone.util.RxUtil;
+import popularmovies.one.fabianreddig.udacity.projectone.util.UiUtil;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -116,5 +117,9 @@ public class MovieListViewModel{
                         addMovieDbs(movieDbs);
                     }
                 }));
+    }
+
+    public int columnCount(){
+        return UiUtil.getListColumnCount();
     }
 }

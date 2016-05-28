@@ -20,4 +20,8 @@ public class UiUtil {
     public static int getListPosterHeight(){
         return ((int) PopularMoviesApplication.getApp().getResources().getDimension(R.dimen.movie_list_poster_height));
     }
+
+    public static int getListColumnCount(){
+        return ((int) PopularMoviesApplication.getApp().getResources().getInteger(R.integer.movie_list_column_count));
+    }
 }

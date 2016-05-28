@@ -11,6 +11,7 @@ import android.support.v4.content.LocalBroadcastManager;
  * Created by Fabian Reddig on 05/23/2016.
  */
 public abstract class PaginatedFragment extends BaseFragment {
+    public static final String PAGE = "Page";
 
     public int page = 0;
     private boolean paginationEnabled = true;
@@ -40,6 +41,9 @@ public abstract class PaginatedFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        if(savedInstanceState!=null) {
+            page = savedInstanceState.getInt(PAGE);
+        }
     }
 
     @Override
@@ -53,6 +57,12 @@ public abstract class PaginatedFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
         broadcastManager.unregisterReceiver(paginator);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(PAGE, page);
+        super.onSaveInstanceState(outState);
     }
 
     public abstract void update();
