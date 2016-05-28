@@ -1,5 +1,7 @@
 package popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodels;
 
+import android.util.Log;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,6 +22,7 @@ import rx.subscriptions.CompositeSubscription;
  */
 
 public class MovieListViewModel{
+    private static final String TAG = MovieListViewModel.class.getName();
 
     @Inject
     TmdbApiWrapper apiWrapper;
@@ -104,6 +107,7 @@ public class MovieListViewModel{
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.e(TAG, e.getMessage());
                         onLoadCompleteListener.onLoadError(e);
                     }
 

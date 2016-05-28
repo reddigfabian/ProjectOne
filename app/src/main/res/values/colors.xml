@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/primaryRed500</color>
+    <color name="colorPrimaryDark">@color/primaryRed700</color>
+    <color name="colorAccent">@color/accentYellow500</color>
+
+
+    <color name="primaryRed50">#F7B3B1</color>
+    <color name="primaryRed100">#F06F6C</color>
+    <color name="primaryRed200">#EA3D39</color>
+    <color name="primaryRed300">#C71915</color>
+    <color name="primaryRed400">#AC1512</color>
+    <color name="primaryRed500">#90120F</color>
+    <color name="primaryRed600">#740F0C</color>
+    <color name="primaryRed700">#590B09</color>
+    <color name="primaryRed800">#3D0806</color>
+    <color name="primaryRed900">#210403</color>
+
+    <color name="accentYellow50">#FFFFFF</color>
+    <color name="accentYellow100">#F9EBBB</color>
+    <color name="accentYellow200">#F4DC87</color>
+    <color name="accentYellow300">#EFC846</color>
+    <color name="accentYellow400">#ECC029</color>
+    <color name="accentYellow500">#E3B414</color>
+    <color name="accentYellow600">#C79E12</color>
+    <color name="accentYellow700">#AB870F</color>
+    <color name="accentYellow800">#8F710D</color>
+    <color name="accentYellow900">#735B0A</color>
+
 </resources>
