@@ -18,7 +18,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/refresh"
@@ -32,7 +33,7 @@
                 app:adapter='@{"popularmovies.one.fabianreddig.udacity.projectone.common.adapters.ListPaginatedAdapter"}'
                 app:itemView="@{listModel.getItemView()}"
                 app:items="@{listModel.getModels()}"
-                app:layoutManager="@{LayoutManagers.grid(columnCount)}" />
+                app:layoutManager="@{LayoutManagers.grid(columnCount)}"/>
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <ProgressBar

@@ -14,9 +14,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:imageUrl="@{viewModel.completePosterPath}"
+            app:listImageUrl="@{viewModel.completeSmallPosterPath}"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:contentDescription="@{viewModel.movieText()}"/>
+            android:onClick="@{viewModel.onMovieClicked}"
+            android:contentDescription="@{viewModel.getTitle}"/>
     </LinearLayout>
 </layout>

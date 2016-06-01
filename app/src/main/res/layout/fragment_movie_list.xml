@@ -6,15 +6,28 @@
             name="movieListViewModel"
             type="popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodels.MovieListViewModel" />
     </data>
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/movie_list_main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/container">
+        android:fitsSystemWindows="true">
         <include
             android:id="@+id/swipeable_recycler_main"
             layout="@layout/swipeable_recycler"
             app:listModel="@{movieListViewModel.getMovies}"
             app:columnCount="@{movieListViewModel.columnCount}"/>
 
-    </FrameLayout>
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/PopupMenuStyle"/>
+        </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

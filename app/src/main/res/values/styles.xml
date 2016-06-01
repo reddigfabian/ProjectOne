@@ -1,11 +1,22 @@
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ToolbarStyle" parent="AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="elevation">0dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:theme">@style/AppTheme</item>
+    </style>
+
+    <style name="PopupMenuStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@color/primaryRed700</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--TODO Figure out how to do fading edge styling in versions < 21-->
 </resources>

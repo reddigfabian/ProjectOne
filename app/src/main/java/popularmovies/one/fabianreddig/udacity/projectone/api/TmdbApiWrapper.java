@@ -17,6 +17,7 @@ public class TmdbApiWrapper implements TmdbApiWrapperInterface {
 
     public static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
     public static final String IMAGE_WIDTH_PARAM_185 = "w185/";
+    public static final String IMAGE_WIDTH_PARAM_342 = "w342/";
 
     public TmdbApi getApi() {
         return new TmdbApi(BuildConfig.THE_MOVIE_DB_API_KEY);

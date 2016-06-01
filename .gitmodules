@@ -1,0 +1,6 @@
+[submodule "themoviedbapi"]
+	path = themoviedbapi
+	url = https://github.com/holgerbrandl/themoviedbapi.git
+[submodule "the-movie-db-api"]
+	path = the-movie-db-api
+	url = https://github.com/holgerbrandl/themoviedbapi.git

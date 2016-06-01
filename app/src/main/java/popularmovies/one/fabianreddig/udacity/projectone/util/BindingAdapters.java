@@ -18,14 +18,29 @@ public class BindingAdapters {
         throw new AssertionError();
     }
 
-    @BindingAdapter({"bind:imageUrl"})
-    public static void loadImage(ImageView view, String url) {
+
+    @BindingAdapter({"bind:listImageUrl"})
+    public static void loadListImage(ImageView view, String url) {
         if(url!=null && !url.equals("")) {
             Picasso.with(view.getContext())
                     .load(url)
                     .resize(UiUtil.getListPosterWidth(), UiUtil.getListPosterHeight())
 //                    .error(ContextCompat.getDrawable(view.getContext(), R.drawable.error)) //TODO Better error img
-                    .placeholder(ContextCompat.getDrawable(view.getContext(), R.drawable.movie_list_item_placeholder)) //TODO 9Patch// placeholder
+                    .placeholder(ContextCompat.getDrawable(view.getContext(), R.drawable.placeholder_shape)) //TODO 9Patch// placeholder
+                    .into(view);
+        }else{
+//            view.setImageResource(R.drawable.error); // TODO: 4/9/16 Set this to a placeholder image with the movie text on top
+        }
+    }
+
+    @BindingAdapter({"bind:detailImageUrl"})
+    public static void loadDetailImage(ImageView view, String url) {
+        if(url!=null && !url.equals("")) {
+            Picasso.with(view.getContext())
+                    .load(url)
+                    .resize(UiUtil.getListPosterWidth(), UiUtil.getListPosterHeight())
+//                    .error(ContextCompat.getDrawable(view.getContext(), R.drawable.error)) //TODO Better error img
+                    .placeholder(ContextCompat.getDrawable(view.getContext(), R.drawable.placeholder_shape)) //TODO 9Patch// placeholder
                     .into(view);
         }else{
 //            view.setImageResource(R.drawable.error); // TODO: 4/9/16 Set this to a placeholder image with the movie text on top

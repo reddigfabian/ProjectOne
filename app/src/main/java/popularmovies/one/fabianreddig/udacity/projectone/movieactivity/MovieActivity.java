@@ -27,9 +27,10 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     public void switchFragment(Fragment frag, boolean addToBackstack){
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.main_fragment_holder, frag);
-        if(addToBackstack){ft.addToBackStack(frag.getClass().getName());}
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_holder, frag);
+        if(addToBackstack){
+            ft.addToBackStack(frag.getClass().getName());
+        }
         ft.commit();
     }
 }

@@ -1,5 +1,6 @@
 package popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodels;
 
+import android.support.annotation.IntDef;
 import android.util.Log;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import popularmovies.one.fabianreddig.udacity.projectone.common.CustomItemViewSe
 import popularmovies.one.fabianreddig.udacity.projectone.common.viewmodels.ListModel;
 import popularmovies.one.fabianreddig.udacity.projectone.util.RxUtil;
 import popularmovies.one.fabianreddig.udacity.projectone.util.UiUtil;
+import rx.Single;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -25,11 +27,15 @@ import rx.subscriptions.CompositeSubscription;
 public class MovieListViewModel{
     private static final String TAG = MovieListViewModel.class.getName();
 
+    public static final int POPULAR = 0, TOP_RATED = 1;
+    private int currentSortOrder;
+
     @Inject
     TmdbApiWrapper apiWrapper;
 
     private CompositeSubscription subscription;
     private ListModel<MovieListItemViewModel> movies;
+    private int listPosition;
 
     private static MovieListViewModel instance;
 
@@ -46,8 +52,17 @@ public class MovieListViewModel{
 
     private MovieListViewModel(){
         PopularMoviesApplication.applicationComponent().inject(this);
+        currentSortOrder = POPULAR;
         instance = this;
         movies = new ListModel<>(new CustomItemViewSelector<>(BR.viewModel));
+    }
+
+    public int getCurrentSortOrder() {
+        return currentSortOrder;
+    }
+
+    public void setCurrentSortOrder(@SortOrder int sortOrder) {
+        this.currentSortOrder = sortOrder;
     }
 
     public ListModel<MovieListItemViewModel> getMovies() {
@@ -99,7 +114,7 @@ public class MovieListViewModel{
     }
 
     public void loadMovies(int page){
-        addSubscription(apiWrapper.getPopularMovieList(page).compose(RxUtil.singleBackgroundToMainThread())
+        addSubscription(getMovieListSingleBySortOrder(page)
                 .subscribe(new Subscriber<List<MovieDb>>() {
                     @Override
                     public void onCompleted() {
@@ -119,7 +134,26 @@ public class MovieListViewModel{
                 }));
     }
 
+    private Single<List<MovieDb>> getMovieListSingleBySortOrder(int page) {
+        if(currentSortOrder == TOP_RATED) {
+            return apiWrapper.getTopRatedMovieList(page).compose(RxUtil.singleBackgroundToMainThread());
+        }else{
+            return apiWrapper.getPopularMovieList(page).compose(RxUtil.singleBackgroundToMainThread());
+        }
+    }
+
     public int columnCount(){
         return UiUtil.getListColumnCount();
     }
+
+    public int getListPosition() {
+        return listPosition;
+    }
+
+    public void setListPosition(int listPosition) {
+        this.listPosition = listPosition;
+    }
+
+    @IntDef({POPULAR, TOP_RATED})
+    public @interface SortOrder{}
 }

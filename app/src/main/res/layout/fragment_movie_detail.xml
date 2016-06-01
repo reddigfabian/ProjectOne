@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="movieViewModel"
+            type="popularmovies.one.fabianreddig.udacity.projectone.movieactivity.viewmodels.MovieListItemViewModel" />
+    </data>
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:toolbarId="@+id/toolbar">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/accentYellow400"
+                    app:layout_collapseMode="parallax"/>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    style="@style/ToolbarStyle"
+                    android:background="@android:color/transparent"
+                    app:layout_collapseMode="pin" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <TextView
+                    android:id="@+id/firsttext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/white"
+                    android:text="Old west sheriff tricky sneezes boogie nights, boogie nights French café patron old west sheriff tricky sneezes fox hunting cappuccino catcher Sergeant major vincent price? Dolor sit amet luxurious face mop cardinal richelieu, freestyle off-piste cardinal richelieu mustachio dolor sit amet soup strainer face mop luxurious."/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/white"
+                    android:text="Casual style mouthbrow brad pitt rugged et?"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/white"
+                    android:text="Quis dickie davies iron tache handsome east european, handsome quis east european kaiser bill lorreto del mar iron tache saddam hussein dickie davies? Elit joseph stalin um yesbaby knavish rogue helllloooo success um yesbaby, cream bun disaster um yesbaby joseph stalin top gun old west sheriff success alpha trion elit knavish rogue brigadier imperial helllloooo um yesbaby Daniel plainview, old west sheriff imperial um yesbaby brigadier Daniel plainview joseph stalin cream bun disaster elit knavish rogue rugged success man of the year 1986 zap rowsdower top gun alpha trion d’artagnan um yesbaby goose helllloooo?" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/white"
+                    android:text="Toothbrush basil fawlty sam elliott quis mark lawrenson, sam elliott mark lawrenson east european trimmed success toothbrush quis Fallen eyebrow basil fawlty Droopy fu manchu helllloooo boogie nights?" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <ImageView
+            android:id="@+id/movie_detail_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            app:layout_anchor="@+id/appbar"
+            app:layout_anchorGravity="bottom|left"
+            bind:listImageUrl="@{movieViewModel.completeMediumPosterPath()}"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
