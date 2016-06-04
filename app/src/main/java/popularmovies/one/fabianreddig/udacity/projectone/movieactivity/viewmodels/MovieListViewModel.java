@@ -93,6 +93,7 @@ public class MovieListViewModel{
     public final void detachFromView(){
         if(!subscription.isUnsubscribed()){
             subscription.unsubscribe();
+            subscription = null;
         }
         onLoadCompleteListener = null;
     }
